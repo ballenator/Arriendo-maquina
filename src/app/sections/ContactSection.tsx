@@ -96,7 +96,7 @@ export default function ContactSection() {
 
           {/* Formulario */}
           <motion.form
-            action="https://formspree.io/f/TU-CODIGO"
+            action="https://formspree.io/f/xykvqqbg"
             method="POST"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
