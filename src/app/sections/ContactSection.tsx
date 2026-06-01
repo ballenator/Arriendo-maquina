@@ -8,35 +8,45 @@ import { useRef, useState } from "react";
 
 export default function ContactSection() {
   const formRef = useRef<HTMLFormElement>(null);
-const [enviado, setEnviado] = useState(false);
+  const [enviado, setEnviado] = useState(false);
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault();
 
-  const formData = new FormData(e.currentTarget);
+    try {
+      const formData = new FormData(e.currentTarget);
 
-  const response = await fetch(
-    "https://formspree.io/f/xykvqqbg",
-    {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
+      const response = await fetch(
+        "https://formspree.io/f/xykvqqbg",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Accept: "application/json",
+          },
+        }
+      );
+
+      if (response.ok) {
+        setEnviado(true);
+        formRef.current?.reset();
+
+        window.setTimeout(() => {
+          setEnviado(false);
+        }, 5000);
+      } else {
+        alert("Ocurrió un error al enviar la consulta.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Error de conexión. Inténtalo nuevamente.");
     }
-  );
+  };
 
-  if (response.ok) {
-    setEnviado(true);
-    formRef.current?.reset();
 
-    setTimeout(() => {
-      setEnviado(false);
-    }, 5000);
-  } else {
-    alert("Ocurrió un error al enviar la consulta.");
-  }
-};
+
   return (
     
 
