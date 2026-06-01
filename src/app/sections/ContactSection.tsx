@@ -2,54 +2,9 @@
 
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
-import { useRef, useState } from "react";
-
-
 
 export default function ContactSection() {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [enviado, setEnviado] = useState(false);
-
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
-
-    try {
-      const formData = new FormData(e.currentTarget);
-
-      const response = await fetch(
-        "https://formspree.io/f/xykvqqbg",
-        {
-          method: "POST",
-          body: formData,
-          headers: {
-            Accept: "application/json",
-          },
-        }
-      );
-
-      if (response.ok) {
-        setEnviado(true);
-        formRef.current?.reset();
-
-        window.setTimeout(() => {
-          setEnviado(false);
-        }, 5000);
-      } else {
-        alert("Ocurrió un error al enviar la consulta.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Error de conexión. Inténtalo nuevamente.");
-    }
-  };
-
-
-
   return (
-    
-
     <section
       id="contacto"
       className="py-32 px-6 bg-gradient-to-b from-white via-orange-50 to-white"
@@ -139,22 +94,21 @@ export default function ContactSection() {
 
           </motion.div>
 
-            
           {/* Formulario */}
           <motion.form
-            ref={formRef}
-            onSubmit={handleSubmit}
+            action="https://formspree.io/f/xykvqqbg"
+            method="POST"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="bg-white p-10 rounded-[2rem] border border-gray-200 shadow-xl space-y-6"
           >
+
             <input
               type="text"
               name="nombre"
               placeholder="Nombre"
-              required
               className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition"
             />
 
@@ -162,7 +116,6 @@ export default function ContactSection() {
               type="email"
               name="correo"
               placeholder="Correo"
-              required
               className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition"
             />
 
@@ -170,7 +123,6 @@ export default function ContactSection() {
               name="mensaje"
               placeholder="¿Qué maquinaria necesitas?"
               rows={5}
-              required
               className="w-full bg-gray-50 border border-gray-200 rounded-2xl px-5 py-4 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition resize-none"
             />
 
@@ -181,20 +133,14 @@ export default function ContactSection() {
               Enviar consulta
             </button>
 
-            {enviado && (
-              <div className="bg-green-100 border border-green-300 text-green-700 px-4 py-3 rounded-2xl text-center font-medium">
-                ✅ Consulta enviada correctamente. Nos pondremos en contacto contigo pronto.
-              </div>
-            )}
-
             <p className="text-sm text-gray-500 text-center">
               También puedes contactarnos directamente por WhatsApp para una respuesta más rápida.
             </p>
+
           </motion.form>
 
         </div>
       </div>
     </section>
-    
   );
 }
