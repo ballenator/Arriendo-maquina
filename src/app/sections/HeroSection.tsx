@@ -52,7 +52,7 @@ export default function HeroSection() {
           </a>
 
           <a
-            href="https://wa.me/56900000000"
+            href="https://wa.me/56954780824"
             target="_blank"
             rel="noopener noreferrer"
             className="border-2 border-orange-500 text-orange-500 px-10 py-5 rounded-2xl font-bold hover:bg-orange-500 hover:text-white transition"
