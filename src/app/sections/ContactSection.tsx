@@ -4,7 +4,10 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useRef, useState } from "react";
 
-const formRef = useRef<HTMLFormElement>(null);
+
+
+export default function ContactSection() {
+  const formRef = useRef<HTMLFormElement>(null);
 const [enviado, setEnviado] = useState(false);
 
 const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -34,9 +37,8 @@ const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     alert("Ocurrió un error al enviar la consulta.");
   }
 };
-
-export default function ContactSection() {
   return (
+    
 
     <section
       id="contacto"
